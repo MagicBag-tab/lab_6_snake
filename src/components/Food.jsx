@@ -1,11 +1,17 @@
 export default function Food({ position, cellSize }) {
   const style = {
     position: "absolute",
-    left:   position.x * cellSize,
-    top:    position.y * cellSize,
-    width:  cellSize,
+    left: position.x * cellSize,
+    top: position.y * cellSize,
+    width: cellSize,
     height: cellSize,
   };
 
-  return <div className="food" style={style} />;
+  return (
+    <div className="food" style={style}>
+      <span className="apple-stem" />
+      <span className="apple-leaf" />
+      <span className="apple-shine" />
+    </div>
+  );
 }

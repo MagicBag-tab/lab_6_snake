@@ -3,7 +3,8 @@ import Score from "../components/Score";
 import { useGameLoop } from "../hooks/useGameLoop";
 
 export default function Game({ onBack }) {
-  const { snake, food, score, gameOver, started, resetGame } = useGameLoop();
+  const { snake, food, direction, score, gameOver, started, resetGame } =
+    useGameLoop();
 
   return (
     <main className="app game-screen">
@@ -18,7 +19,7 @@ export default function Game({ onBack }) {
       </div>
 
       <div className="game-stage">
-        <Board snake={snake} food={food} />
+        <Board snake={snake} food={food} direction={direction} />
 
         {!started && !gameOver && (
           <div className="overlay">

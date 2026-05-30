@@ -28,6 +28,46 @@ function getInitialGameState() {
   };
 }
 
+function isOppositeDirection(currentDirection, nextDirection) {
+  return (
+    nextDirection.x === -currentDirection.x &&
+    nextDirection.y === -currentDirection.y
+  );
+}
+
+function moveSnake(current) {
+  const head = {
+    x: current.snake[0].x + current.direction.x,
+    y: current.snake[0].y + current.direction.y,
+  };
+  const ateFood = head.x === current.food.x && head.y === current.food.y;
+  const collisionSnake = ateFood ? current.snake : current.snake.slice(0, -1);
+
+  if (checkCollision(head, collisionSnake)) {
+    return {
+      ...current,
+      gameOver: true,
+    };
+  }
+
+  const nextSnake = ateFood
+    ? [head, ...current.snake]
+    : [head, ...current.snake.slice(0, -1)];
+  const nextScore = ateFood ? current.score + 10 : current.score;
+  const nextSpeed =
+    ateFood && nextScore % 50 === 0
+      ? Math.max(60, current.speed - 15)
+      : current.speed;
+
+  return {
+    ...current,
+    snake: nextSnake,
+    food: ateFood ? getRandomFood(nextSnake) : current.food,
+    score: nextScore,
+    speed: nextSpeed,
+  };
+}
+
 export function useGameLoop() {
   const [game, setGame] = useState(getInitialGameState);
 
@@ -38,13 +78,12 @@ export function useGameLoop() {
 
       e.preventDefault();
       setGame((current) => {
-        if (current.gameOver) return current;
-
-        const isOppositeDirection =
-          nextDirection.x === -current.direction.x &&
-          nextDirection.y === -current.direction.y;
-
-        if (isOppositeDirection) return current;
+        if (
+          current.gameOver ||
+          isOppositeDirection(current.direction, nextDirection)
+        ) {
+          return current;
+        }
 
         return {
           ...current,
@@ -65,35 +104,7 @@ export function useGameLoop() {
       setGame((current) => {
         if (!current.started || current.gameOver) return current;
 
-        const head = {
-          x: current.snake[0].x + current.direction.x,
-          y: current.snake[0].y + current.direction.y,
-        };
-
-        if (checkCollision(head, current.snake)) {
-          return {
-            ...current,
-            gameOver: true,
-          };
-        }
-
-        const ateFood = head.x === current.food.x && head.y === current.food.y;
-        const nextSnake = ateFood
-          ? [head, ...current.snake]
-          : [head, ...current.snake.slice(0, -1)];
-        const nextScore = ateFood ? current.score + 10 : current.score;
-        const nextSpeed =
-          ateFood && nextScore % 50 === 0
-            ? Math.max(60, current.speed - 15)
-            : current.speed;
-
-        return {
-          ...current,
-          snake: nextSnake,
-          food: ateFood ? getRandomFood(nextSnake) : current.food,
-          score: nextScore,
-          speed: nextSpeed,
-        };
+        return moveSnake(current);
       });
     }, game.speed);
 
@@ -107,6 +118,7 @@ export function useGameLoop() {
   return {
     snake: game.snake,
     food: game.food,
+    direction: game.direction,
     score: game.score,
     gameOver: game.gameOver,
     started: game.started,
