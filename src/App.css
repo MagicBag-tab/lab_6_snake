@@ -6,11 +6,9 @@
 
 body {
   background:
-    linear-gradient(90deg, rgba(0, 255, 213, 0.05) 1px, transparent 1px),
-    linear-gradient(rgba(112, 255, 158, 0.035) 1px, transparent 1px),
-    linear-gradient(135deg, #05060a 0%, #0a1017 45%, #120817 100%);
-  background-size: 42px 42px, 42px 42px, auto;
-  color: #e8fff9;
+    radial-gradient(circle at top, rgba(0, 255, 213, 0.1), transparent 32rem),
+    linear-gradient(145deg, #05070a 0%, #0c1117 58%, #07080d 100%);
+  color: #eafdf8;
   font-family: "Courier New", monospace;
   display: flex;
   justify-content: center;
@@ -40,20 +38,18 @@ body {
 
 .title {
   font-size: clamp(2rem, 8vw, 3.2rem);
-  letter-spacing: 0.24em;
-  color: #d7fff7;
+  letter-spacing: 0.18em;
+  color: #ecfffb;
   text-transform: uppercase;
   text-shadow:
-    0 0 8px rgba(0, 255, 213, 0.95),
-    0 0 24px rgba(74, 222, 128, 0.65),
-    0 0 44px rgba(244, 114, 182, 0.28);
+    0 0 10px rgba(0, 255, 213, 0.5),
+    0 0 24px rgba(74, 222, 128, 0.18);
 }
 
 .intro {
   max-width: 340px;
-  color: #9fffea;
+  color: #91bdb6;
   line-height: 1.5;
-  text-shadow: 0 0 14px rgba(0, 255, 213, 0.28);
 }
 
 .game-header {
@@ -72,18 +68,16 @@ body {
 }
 .score-label {
   font-size: 0.75rem;
-  color: #7dd3fc;
+  color: #6da59d;
   letter-spacing: 0.2em;
 }
 .score-value {
   font-size: 2rem;
-  color: #f8ff72;
+  color: #bbfff1;
   font-weight: bold;
   min-width: 60px;
   text-align: right;
-  text-shadow:
-    0 0 10px rgba(248, 255, 114, 0.85),
-    0 0 24px rgba(0, 255, 213, 0.35);
+  text-shadow: 0 0 14px rgba(0, 255, 213, 0.34);
 }
 
 /* Board */
@@ -95,42 +89,23 @@ body {
 .board {
   position: relative;
   background:
-    linear-gradient(rgba(0, 255, 213, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 213, 0.1) 1px, transparent 1px),
     conic-gradient(
       from 90deg,
-      #050608 25%,
-      #15181d 0 50%,
-      #050608 0 75%,
-      #15181d 0
-    );
-  background-size:
-    var(--cell-size) var(--cell-size),
-    var(--cell-size) var(--cell-size),
-    calc(var(--cell-size) * 2) calc(var(--cell-size) * 2);
-  border: 2px solid #00ffd5;
+      #090b0f 25%,
+      #171a20 0 50%,
+      #090b0f 0 75%,
+      #171a20 0
+    )
+    0 0 / calc(var(--cell-size) * 2) calc(var(--cell-size) * 2);
+  border: 1px solid rgba(0, 255, 213, 0.52);
   border-radius: 4px;
   overflow: hidden;
   max-width: 100%;
   aspect-ratio: 1;
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-    inset 0 0 30px rgba(0, 255, 213, 0.1),
-    0 0 0 1px rgba(248, 255, 114, 0.16),
-    0 0 30px rgba(0, 255, 213, 0.36),
-    0 18px 44px rgba(0, 0, 0, 0.58);
-}
-.board::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(transparent 50%, rgba(0, 255, 213, 0.055) 50%),
-    linear-gradient(90deg, transparent 50%, rgba(248, 255, 114, 0.035) 50%);
-  background-size: calc(var(--cell-size) * 4) 6px, 8px calc(var(--cell-size) * 4);
-  mix-blend-mode: screen;
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 0 18px rgba(0, 255, 213, 0.16),
+    0 18px 44px rgba(0, 0, 0, 0.42);
 }
 
 /* Snake */
@@ -138,30 +113,26 @@ body {
   position: absolute;
   z-index: 1;
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.36), transparent 18% 82%, rgba(255, 255, 255, 0.2)),
-    linear-gradient(135deg, #00ffd5, #39ff88 48%, #0b8f5f);
-  border: 1px solid #91ffe3;
-  border-radius: 7px;
+    linear-gradient(135deg, rgba(236, 255, 251, 0.34), transparent 38%),
+    linear-gradient(135deg, #42e8bf, #20b677 62%, #116142);
+  border: 1px solid rgba(179, 255, 233, 0.7);
+  border-radius: 6px;
   box-shadow:
-    inset 0 -3px 0 rgba(0, 0, 0, 0.28),
-    inset 0 2px 0 rgba(255, 255, 255, 0.34),
-    0 0 8px rgba(0, 255, 213, 0.85),
-    0 0 16px rgba(57, 255, 136, 0.38);
+    inset 0 -2px 0 rgba(0, 0, 0, 0.24),
+    0 0 8px rgba(0, 255, 213, 0.28);
   transform: scale(0.86);
   transition: left 0.05s, top 0.05s;
 }
 .snake-head {
   z-index: 2;
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.52), transparent 20% 80%, rgba(255, 255, 255, 0.26)),
-    linear-gradient(135deg, #f8ff72, #00ffd5 42%, #18d36f);
-  border-color: #f8ff72;
-  border-radius: 9px;
+    linear-gradient(135deg, rgba(255, 255, 255, 0.45), transparent 36%),
+    linear-gradient(135deg, #d9fff4, #42e8bf 52%, #1f8f67);
+  border-color: rgba(222, 255, 247, 0.95);
+  border-radius: 7px;
   box-shadow:
-    inset 0 -3px 0 rgba(0, 0, 0, 0.25),
-    inset 0 2px 0 rgba(255, 255, 255, 0.46),
-    0 0 12px rgba(248, 255, 114, 0.95),
-    0 0 26px rgba(0, 255, 213, 0.7);
+    inset 0 -2px 0 rgba(0, 0, 0, 0.2),
+    0 0 12px rgba(0, 255, 213, 0.36);
   transform: scale(1);
 }
 .snake-head::before {
@@ -170,16 +141,16 @@ body {
   width: 5px;
   height: 5px;
   background: #071015;
-  border: 1px solid #f8ff72;
+  border: 1px solid #dcfff8;
   border-radius: 2px;
-  box-shadow: 0 0 8px #f8ff72;
+  box-shadow: 0 0 6px rgba(220, 255, 248, 0.6);
 }
 .snake-head::after {
   content: "";
   position: absolute;
-  background: #f472b6;
+  background: #ff6f91;
   border-radius: 999px;
-  box-shadow: 0 0 10px rgba(244, 114, 182, 0.95);
+  box-shadow: 0 0 8px rgba(255, 111, 145, 0.55);
 }
 .snake-head-right::before {
   top: 6px;
@@ -236,15 +207,13 @@ body {
   position: absolute;
   z-index: 1;
   background:
-    radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.86), transparent 15%),
-    linear-gradient(135deg, #ff6b9a, #ef4444 48%, #86198f);
-  border: 1px solid #ffc2d8;
-  border-radius: 8px;
+    radial-gradient(circle at 34% 30%, rgba(255, 255, 255, 0.78), transparent 15%),
+    linear-gradient(135deg, #ff6f91, #d93f5f 58%, #6d183b);
+  border: 1px solid rgba(255, 194, 216, 0.84);
+  border-radius: 7px;
   box-shadow:
-    inset 0 -3px 0 rgba(0, 0, 0, 0.24),
-    inset 0 2px 0 rgba(255, 255, 255, 0.34),
-    0 0 12px rgba(244, 114, 182, 0.95),
-    0 0 24px rgba(239, 68, 68, 0.55);
+    inset 0 -2px 0 rgba(0, 0, 0, 0.22),
+    0 0 10px rgba(255, 111, 145, 0.34);
   animation: pulse 0.8s ease-in-out infinite alternate;
 }
 .apple-stem,
@@ -259,20 +228,20 @@ body {
   height: 9px;
   top: -6px;
   left: 10px;
-  background: #f8ff72;
+  background: #d8fff6;
   border-radius: 999px;
   transform: rotate(18deg);
-  box-shadow: 0 0 8px rgba(248, 255, 114, 0.9);
+  box-shadow: 0 0 6px rgba(216, 255, 246, 0.6);
 }
 .apple-leaf {
   width: 10px;
   height: 5px;
   top: 0;
   left: 13px;
-  background: #00ffd5;
+  background: #62d6b8;
   border-radius: 1px 999px 999px 1px;
   transform: rotate(-18deg);
-  box-shadow: 0 0 10px rgba(0, 255, 213, 0.95);
+  box-shadow: 0 0 8px rgba(98, 214, 184, 0.48);
 }
 .apple-shine {
   inset: 4px;
@@ -301,54 +270,42 @@ body {
   gap: 12px;
   padding: 24px;
   text-align: center;
-  color: #d7fff7;
-  background:
-    linear-gradient(rgba(0, 255, 213, 0.08) 1px, transparent 1px),
-    rgba(3, 8, 12, 0.86);
-  background-size: 100% 6px, auto;
-  text-shadow: 0 0 12px rgba(0, 255, 213, 0.6);
+  color: #eafdf8;
+  background: rgba(5, 9, 13, 0.86);
+  text-shadow: 0 0 10px rgba(0, 255, 213, 0.34);
 }
 .game-over-text {
   font-size: 1.8rem;
-  color: #ff6b9a;
+  color: #ff8ba6;
   letter-spacing: 0.3em;
-  text-shadow:
-    0 0 10px rgba(244, 114, 182, 0.95),
-    0 0 22px rgba(239, 68, 68, 0.65);
+  text-shadow: 0 0 14px rgba(255, 111, 145, 0.54);
 }
 .paused-text {
   font-size: 1.8rem;
-  color: #f8ff72;
+  color: #bbfff1;
   letter-spacing: 0.3em;
-  text-shadow:
-    0 0 10px rgba(248, 255, 114, 0.95),
-    0 0 24px rgba(0, 255, 213, 0.55);
+  text-shadow: 0 0 14px rgba(0, 255, 213, 0.42);
 }
 
 .btn {
   padding: 10px 28px;
-  background:
-    linear-gradient(90deg, rgba(0, 255, 213, 0.08), rgba(248, 255, 114, 0.08));
-  border: 1px solid #00ffd5;
-  color: #d7fff7;
+  background: rgba(0, 255, 213, 0.04);
+  border: 1px solid rgba(0, 255, 213, 0.58);
+  color: #eafdf8;
   font-family: "Courier New", monospace;
   font-size: 0.9rem;
   letter-spacing: 0.2em;
   cursor: pointer;
   border-radius: 3px;
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-    0 0 14px rgba(0, 255, 213, 0.28);
-  text-shadow: 0 0 8px rgba(0, 255, 213, 0.8);
+  box-shadow: 0 0 10px rgba(0, 255, 213, 0.14);
+  text-shadow: none;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 .btn:hover {
-  background: #00ffd5;
-  border-color: #f8ff72;
-  color: #031014;
-  box-shadow:
-    0 0 14px rgba(0, 255, 213, 0.85),
-    0 0 28px rgba(248, 255, 114, 0.36);
+  background: rgba(0, 255, 213, 0.16);
+  border-color: rgba(187, 255, 241, 0.9);
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(0, 255, 213, 0.24);
 }
 
 .primary-btn {
@@ -363,7 +320,6 @@ body {
 
 .hint {
   font-size: 0.75rem;
-  color: #68e8ff;
+  color: #6da59d;
   letter-spacing: 0.1em;
-  text-shadow: 0 0 12px rgba(0, 255, 213, 0.35);
 }
