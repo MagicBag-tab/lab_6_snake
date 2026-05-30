@@ -2,6 +2,10 @@
 
 Juego Snake desarrollado con React y Vite. La aplicacion esta separada en componentes reutilizables y maneja el estado del juego con hooks de React.
 
+## Deploy
+
+https://silver-blini-c6e30c.netlify.app/
+
 ## Funcionalidades
 
 - Pantalla de inicio y pantalla de juego.
