@@ -1,39 +1,35 @@
-import { useGameLoop } from "./hooks/useGameLoop";
-import Board from "./components/Board";
-import Score from "./components/Score";
+import { useCallback, useEffect, useState } from "react";
+import Home from "./pages/Home";
+import Game from "./pages/Game";
 import "./App.css";
 
+const ROUTES = {
+  home: "/",
+  game: "/juego",
+};
+
+function getCurrentRoute() {
+  return window.location.pathname === ROUTES.game ? ROUTES.game : ROUTES.home;
+}
+
 export default function App() {
-  const { snake, food, score, gameOver, started, startGame } = useGameLoop();
+  const [route, setRoute] = useState(getCurrentRoute);
 
-  return (
-    <div className="app">
-      <h1 className="title">Snake</h1>
+  useEffect(() => {
+    const handlePopState = () => setRoute(getCurrentRoute());
 
-      <Score score={score} />
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
-      {!started && !gameOver && (
-        <div className="overlay">
-          <p>Usá las flechas del teclado para mover la serpiente</p>
-          <button className="btn" onClick={startGame}>
-            INICIAR JUEGO
-          </button>
-        </div>
-      )}
+  const navigate = useCallback((nextRoute) => {
+    window.history.pushState({}, "", nextRoute);
+    setRoute(getCurrentRoute());
+  }, []);
 
-      {gameOver && (
-        <div className="overlay">
-          <p className="game-over-text">GAME OVER</p>
-          <p>Puntaje final: <strong>{score}</strong></p>
-          <button className="btn" onClick={startGame}>
-            REINICIAR
-          </button>
-        </div>
-      )}
+  if (route === ROUTES.game) {
+    return <Game onBack={() => navigate(ROUTES.home)} />;
+  }
 
-      {started && <Board snake={snake} food={food} />}
-
-      <p className="hint">↑ ↓ ← → para mover</p>
-    </div>
-  );
+  return <Home onStart={() => navigate(ROUTES.game)} />;
 }

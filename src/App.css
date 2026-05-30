@@ -15,10 +15,23 @@ body {
 }
 
 .app {
+  width: min(100%, 560px);
+  min-height: 100svh;
+  padding: 24px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 16px;
+  margin: 0 auto;
+}
+
+.home-screen {
+  gap: 22px;
+}
+
+.game-screen {
+  gap: 14px;
 }
 
 .title {
@@ -26,6 +39,20 @@ body {
   letter-spacing: 0.3em;
   color: #4ade80;
   text-shadow: 0 0 20px #4ade8088;
+}
+
+.intro {
+  max-width: 340px;
+  color: #9ca3af;
+  line-height: 1.5;
+}
+
+.game-header {
+  width: min(100%, 480px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 /* Score */
@@ -48,12 +75,19 @@ body {
 }
 
 /* Board */
+.game-stage {
+  position: relative;
+  width: min(100%, 480px);
+}
+
 .board {
   position: relative;
   background: #1a1a1a;
   border: 2px solid #2d2d2d;
   border-radius: 4px;
   overflow: hidden;
+  max-width: 100%;
+  aspect-ratio: 1;
 }
 
 /* Snake */
@@ -86,12 +120,18 @@ body {
 
 /* Overlay (inicio / game over) */
 .overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 12px;
+  padding: 24px;
   text-align: center;
   color: #9ca3af;
+  background: rgba(15, 15, 15, 0.78);
 }
 .game-over-text {
   font-size: 1.8rem;
@@ -115,6 +155,16 @@ body {
 .btn:hover {
   background: #4ade80;
   color: #0f0f0f;
+}
+
+.primary-btn {
+  min-width: 180px;
+}
+
+.secondary-btn {
+  min-width: 92px;
+  padding-inline: 14px;
+  font-size: 0.72rem;
 }
 
 .hint {

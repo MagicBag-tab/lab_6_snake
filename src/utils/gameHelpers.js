@@ -1,6 +1,6 @@
 export const BOARD_SIZE = 20;
 export const INITIAL_SNAKE = [{ x: 10, y: 10 }];
-export const INITIAL_DIRECTION = { x: 0, y: -1 };
+export const INITIAL_DIRECTION = { x: 0, y: 0 };
 export const INITIAL_SPEED = 150;
 
 export function getRandomFood(snake) {
