@@ -1,4 +1,5 @@
 export const BOARD_SIZE = 20;
+// El primer segmento siempre es la cabeza de la serpiente.
 export const INITIAL_SNAKE = [
   { x: 10, y: 10 },
   { x: 9, y: 10 },

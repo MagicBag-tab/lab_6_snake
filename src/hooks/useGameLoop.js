@@ -24,6 +24,7 @@ function getInitialGameState() {
     score: 0,
     gameOver: false,
     started: false,
+    paused: false,
     speed: INITIAL_SPEED,
   };
 }
@@ -73,6 +74,20 @@ export function useGameLoop() {
 
   useEffect(() => {
     const handleKey = (e) => {
+      const isPauseKey = e.code === "Space" || e.key === " ";
+      if (isPauseKey) {
+        e.preventDefault();
+        setGame((current) => {
+          if (!current.started || current.gameOver) return current;
+
+          return {
+            ...current,
+            paused: !current.paused,
+          };
+        });
+        return;
+      }
+
       const nextDirection = KEY_DIRECTIONS[e.key];
       if (!nextDirection) return;
 
@@ -98,18 +113,20 @@ export function useGameLoop() {
   }, []);
 
   useEffect(() => {
-    if (!game.started || game.gameOver) return;
+    if (!game.started || game.gameOver || game.paused) return;
 
     const interval = setInterval(() => {
       setGame((current) => {
-        if (!current.started || current.gameOver) return current;
+        if (!current.started || current.gameOver || current.paused) {
+          return current;
+        }
 
         return moveSnake(current);
       });
     }, game.speed);
 
     return () => clearInterval(interval);
-  }, [game.started, game.gameOver, game.speed]);
+  }, [game.started, game.gameOver, game.paused, game.speed]);
 
   const resetGame = useCallback(() => {
     setGame(getInitialGameState());
@@ -122,6 +139,7 @@ export function useGameLoop() {
     score: game.score,
     gameOver: game.gameOver,
     started: game.started,
+    paused: game.paused,
     resetGame,
   };
 }

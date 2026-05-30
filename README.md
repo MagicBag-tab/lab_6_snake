@@ -1,16 +1,30 @@
-# React + Vite
+# 🐍 Snake Game — React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Implementación del clásico juego Snake usando React con Vite.
 
-Currently, two official plugins are available:
+## Instalación y uso
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+Abrí http://localhost:5173 en tu navegador.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Cómo jugar
 
-## Expanding the ESLint configuration
+- Presioná **INICIAR JUEGO** para comenzar
+- Usá las **flechas del teclado** (↑ ↓ ← →) para mover la serpiente
+- Comé la comida roja para crecer y sumar puntos
+- Evitá las paredes y tu propio cuerpo
+- La velocidad aumenta cada 50 puntos
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Estructura de componentes
+
+| Componente | Responsabilidad                        |
+|------------|----------------------------------------|
+| `App`      | Orquestador principal, usa el hook     |
+| `Board`    | Tablero: contiene Snake y Food         |
+| `Snake`    | Renderiza los segmentos de la serpiente|
+| `Food`     | Renderiza la comida                    |
+| `Score`    | Muestra el puntaje actual              |

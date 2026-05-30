@@ -9,7 +9,11 @@ export default function Board({ snake, food, direction }) {
   return (
     <div
       className="board"
-      style={{ width: BOARD_PX, height: BOARD_PX, "--cell-size": `${CELL_SIZE}px` }}
+      style={{
+        width: BOARD_PX,
+        height: BOARD_PX,
+        "--cell-size": `${CELL_SIZE}px`,
+      }}
     >
       <Snake segments={snake} cellSize={CELL_SIZE} direction={direction} />
       <Food position={food} cellSize={CELL_SIZE} />
